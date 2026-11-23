@@ -1,0 +1,62 @@
+# Publishes a submission when an editor adds the "approved" label to its issue
+# (the editors' page does this when you click "Approve and publish").
+name: Publish approved submission
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+
+# one at a time, so two approvals never overwrite each other
+concurrency:
+  group: publish-submission
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event.label.name == 'approved' && startsWith(github.event.issue.title, '[Submission]') && github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ISSUE: ${{ github.event.issue.number }}
+      SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Merge the submission into the data
+        run: node scripts/apply-submission.js
+
+      - name: Commit and push
+        run: |
+          git config user.name "fptapprox-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/compendium.json
+          git commit -m "Publish submission #${ISSUE}"
+          git pull --rebase
+          git push
+
+      - name: Rebuild the site
+        continue-on-error: true
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || true
+
+      - name: Tell the submitter and close the issue
+        run: |
+          gh issue comment "$ISSUE" --repo "${{ github.repository }}" --body-file .publish-success.md
+          gh label create published --repo "${{ github.repository }}" --color 0d6a62 --description "Added to the compendium" 2>/dev/null || true
+          gh issue edit "$ISSUE" --repo "${{ github.repository }}" --add-label published --remove-label approved
+          gh issue close "$ISSUE" --repo "${{ github.repository }}" --reason completed
+
+      - name: Report a failure on the issue
+        if: failure()
+        run: |
+          if [ ! -f .publish-error.md ]; then echo "Publishing failed. See the log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" > .publish-error.md; fi
+          gh issue comment "$ISSUE" --repo "${{ github.repository }}" --body-file .publish-error.md
+          gh issue edit "$ISSUE" --repo "${{ github.repository }}" --remove-label approved || true
