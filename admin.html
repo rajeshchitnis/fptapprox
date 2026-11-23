@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Editors | FPT Approximation Compendium</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script defer src="assets/apply.js"></script>
+  <script defer src="assets/site.js"></script>
+  <script defer src="assets/admin.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><span class="cap">FPT</span> Approximation Compendium</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Browse</a>
+      <a href="about.html">About</a>
+      <a href="admin.html" aria-current="page">Editors</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <h1>Review submissions</h1>
+  <p class="lede">Each pending submission is shown exactly as it will appear on the site. Approving publishes it automatically within a couple of minutes.</p>
+
+  <div class="admin-grid">
+    <section class="card" id="auth" aria-labelledby="auth-h">
+      <h2 id="auth-h">Editor sign-in</h2>
+      <div id="auth-body"></div>
+    </section>
+
+    <section>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" aria-controls="tab-pending" id="t-pending">Pending</button>
+        <button role="tab" aria-selected="false" aria-controls="tab-email" id="t-email">Add an emailed submission</button>
+        <button role="tab" aria-selected="false" aria-controls="tab-done" id="t-done">Recently handled</button>
+        <button role="tab" aria-selected="false" aria-controls="tab-edit" id="t-edit">Edit existing entries</button>
+      </div>
+
+      <div role="tabpanel" id="tab-pending" aria-labelledby="t-pending">
+        <div id="pending"><p class="loading">Loading submissions…</p></div>
+      </div>
+
+      <div role="tabpanel" id="tab-email" aria-labelledby="t-email" hidden>
+        <p class="fieldset-help">When someone sends a submission by email, paste the whole email text here. The site finds the submission data in it and shows the preview.</p>
+        <div class="field">
+          <label for="email-text">Email text</label>
+          <textarea id="email-text" class="mathy" style="min-height:12rem" placeholder="Paste the email, including the block that starts with ```json"></textarea>
+        </div>
+        <button type="button" class="btn" id="email-parse">Show preview</button>
+        <div id="email-out" style="margin-top:1.25rem"></div>
+      </div>
+
+      <div role="tabpanel" id="tab-done" aria-labelledby="t-done" hidden>
+        <div id="done"><p class="loading">Loading…</p></div>
+      </div>
+
+      <div role="tabpanel" id="tab-edit" aria-labelledby="t-edit" hidden>
+        <div class="card prose">
+          <h2>Correcting or rearranging existing entries</h2>
+          <p>All content lives in one file, <code>data/compendium.json</code>. To fix a typo, mark a problem as tight, merge duplicate problems or move a tag to a different group, edit that file directly on GitHub:</p>
+          <p><a class="btn btn-primary" id="edit-link" href="#" target="_blank" rel="noopener">Edit data/compendium.json on GitHub</a></p>
+          <ol class="steps">
+            <li>Use the pencil icon if the file opens in view mode. Press Ctrl+F to find the problem.</li>
+            <li>Make the change, keeping the quotes and commas as they are. In this file each backslash is written twice: <code>\\(k\\)</code>.</li>
+            <li>Click <b>Commit changes</b>. The site updates within a couple of minutes.</li>
+          </ol>
+          <p>Useful fields on a problem: <code>"tight": true</code> marks the bounds as matching. <code>"short"</code> is the abbreviation. <code>"tags"</code> drives the filters. If you break the file by accident, GitHub keeps every earlier version under <b>History</b>.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a id="repo-link" href="#">Repository on GitHub</a>
+    <a id="actions-link" href="#">Publishing log</a>
+    <span class="spacer"></span>
+    <a href="about.html#editors">Editor guide</a>
+  </div>
+</footer>
+</body>
+</html>

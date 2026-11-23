@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit a result | FPT Approximation Compendium</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script defer src="assets/apply.js"></script>
+  <script defer src="assets/site.js"></script>
+  <script defer src="assets/submit.js"></script>
+</head>
+<body>
+<a class="skip" href="#form">Skip to the form</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><span class="cap">FPT</span> Approximation Compendium</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Browse</a>
+      <a href="index.html#references">References</a>
+      <a href="about.html">About</a>
+      <a href="submit.html" class="nav-cta" aria-current="page">Submit a result</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <h1>Submit a result</h1>
+  <p class="lede">Tell us about a paper with an FPT approximation algorithm or a lower bound. An editor checks every submission before it appears on the site. The preview shows exactly how it will look.</p>
+
+  <div class="split">
+    <form id="form" novalidate>
+      <div id="restored" class="notice info" hidden><p>We restored your unfinished submission from last time. <button type="button" class="btn-link" id="discard">Start over</button></p></div>
+
+      <fieldset>
+        <legend><span class="n" aria-hidden="true">1</span> The paper</legend>
+        <p class="fieldset-help">Paste a link first. For arXiv and DOI links, use <b>Fill in details</b> to complete the rest automatically.</p>
+        <div class="field">
+          <label for="p-url">Link to the paper</label>
+          <div class="inline-group">
+            <input id="p-url" name="url" type="url" placeholder="https://arxiv.org/abs/… or https://doi.org/…" autocomplete="off">
+            <button type="button" class="btn" id="lookup">Fill in details</button>
+          </div>
+          <div class="help" id="lookup-status" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <label for="p-title">Title</label>
+          <input id="p-title" type="text" class="mathy-ok">
+        </div>
+        <div class="field">
+          <label for="p-authors">Authors</label>
+          <input id="p-authors" type="text" placeholder="Rajesh Chitnis, Andreas Emil Feldmann">
+          <div class="help">Full names, separated by commas.</div>
+        </div>
+        <div class="row row-3">
+          <div class="field">
+            <label for="p-venue">Venue <span class="opt">(optional)</span></label>
+            <input id="p-venue" type="text" placeholder="ESA 2018, or arXiv preprint">
+          </div>
+          <div class="field">
+            <label for="p-year">Year</label>
+            <input id="p-year" type="number" min="1950" max="2100" inputmode="numeric">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n" aria-hidden="true">2</span> The problem</legend>
+        <p class="fieldset-help">Attach the result to a problem already in the compendium, or add a new one.</p>
+        <div class="segmented" role="radiogroup" aria-label="Problem">
+          <label><input type="radio" name="pmode" value="existing" checked><span>Existing problem</span></label>
+          <label><input type="radio" name="pmode" value="new"><span>New problem</span></label>
+        </div>
+        <div id="pm-existing" class="field">
+          <label for="pr-id">Problem</label>
+          <select id="pr-id"></select>
+          <div class="help">Not listed? Choose <b>New problem</b> above.</div>
+        </div>
+        <div id="pm-new" hidden>
+          <div class="row row-3">
+            <div class="field">
+              <label for="pr-name">Problem name</label>
+              <input id="pr-name" type="text" placeholder="Directed Feedback Vertex Set">
+            </div>
+            <div class="field">
+              <label for="pr-short">Abbreviation <span class="opt">(optional)</span></label>
+              <input id="pr-short" type="text" placeholder="DFVS">
+            </div>
+          </div>
+          <div class="field">
+            <label for="pr-def">Definition</label>
+            <textarea id="pr-def" class="mathy" placeholder="Given a digraph \(G=(V,E)\) and an integer \(k\), is there a set \(S\subseteq V\) of size \(\leq k\) such that \(G - S\) is acyclic?"></textarea>
+          </div>
+          <div class="field">
+            <label for="pr-param">Parameter</label>
+            <input id="pr-param" type="text" class="mathy" placeholder="solution size \(k\)">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n" aria-hidden="true">3</span> The results</legend>
+        <p class="fieldset-help">One entry per statement. A paper with both an algorithm and a matching lower bound gets two entries.</p>
+        <div class="latex-help">Write math in LaTeX between <code>\(</code> and <code>\)</code>, for example <code>\((2-\epsilon)\)-approximation in \(f(k)\cdot n^{O(1)}\) time</code>. The preview updates as you type.</div>
+        <div id="results"></div>
+        <button type="button" class="btn" id="add-result">Add another result</button>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n" aria-hidden="true">4</span> Tags</legend>
+        <p class="fieldset-help">Pick the areas and assumptions that apply. They power the filters on the main page.</p>
+        <div class="tag-picker" id="tag-picker"></div>
+        <div class="field" style="margin-top:0.9rem">
+          <label for="new-tag">Add a tag that isn't listed <span class="opt">(optional)</span></label>
+          <div class="inline-group">
+            <input id="new-tag" type="text" placeholder="e.g. Bounded treewidth">
+            <button type="button" class="btn" id="add-tag">Add tag</button>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n" aria-hidden="true">5</span> About you</legend>
+        <p class="fieldset-help">Optional. Your name is credited on the entry. Submissions are public, so don't include anything private.</p>
+        <div class="row">
+          <div class="field">
+            <label for="s-name">Your name <span class="opt">(optional)</span></label>
+            <input id="s-name" type="text" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="s-aff">Affiliation <span class="opt">(optional)</span></label>
+            <input id="s-aff" type="text" autocomplete="organization">
+          </div>
+        </div>
+        <div class="field">
+          <label for="s-comments">Note to the editors <span class="opt">(optional)</span></label>
+          <textarea id="s-comments" placeholder="Anything the editors should know: e.g. this improves the previous bound, or this corrects an existing entry."></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n" aria-hidden="true">6</span> Send it</legend>
+        <div id="problems" aria-live="polite"></div>
+        <div class="send-box">
+          <p><b>Send with GitHub</b> opens a new tab with everything filled in. Click <b>Create</b> there to finish. You'll get updates when an editor reviews it.</p>
+          <p>No GitHub account? <b>Send by email</b> opens your mail app with the submission ready to send.</p>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="send-gh">Send with GitHub</button>
+            <button type="button" class="btn" id="send-mail">Send by email</button>
+            <button type="button" class="btn" id="copy">Copy submission text</button>
+          </div>
+          <p class="draft-state" id="draft-state" aria-live="polite"></p>
+        </div>
+      </fieldset>
+    </form>
+
+    <aside class="preview-pane" aria-label="Preview">
+      <h2>Preview: how the entry will look</h2>
+      <div id="preview"><p class="loading">Loading…</p></div>
+      <div class="ref-preview" id="ref-preview"></div>
+    </aside>
+  </div>
+</main>
+
+<template id="result-tpl">
+  <div class="result-row" data-type="algorithm">
+    <button type="button" class="btn btn-small remove" title="Remove this result">Remove</button>
+    <div class="type-pick" role="radiogroup" aria-label="Kind of result">
+      <label><input type="radio" value="algorithm" checked> Algorithm</label>
+      <label><input type="radio" value="lower-bound"> Lower bound</label>
+      <label><input type="radio" value="special-case"> Special case</label>
+      <label><input type="radio" value="note"> Note</label>
+    </div>
+    <div class="field r-title-field" hidden>
+      <label>Special case title</label>
+      <input type="text" class="r-title mathy" placeholder="Planar graphs">
+    </div>
+    <div class="field">
+      <label>Statement</label>
+      <textarea class="r-statement mathy"></textarea>
+    </div>
+  </div>
+</template>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Questions: <a href="mailto:fptapprox@gmail.com">fptapprox@gmail.com</a></span>
+    <a href="about.html#how-it-works">How review works</a>
+    <span class="spacer"></span>
+    <a href="admin.html">Editors</a>
+  </div>
+</footer>
+</body>
+</html>

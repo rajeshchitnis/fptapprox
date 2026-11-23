@@ -1,0 +1,425 @@
+{
+  "meta": {
+    "title": "FPT + Approximation compendium",
+    "email": "fptapprox@gmail.com",
+    "updated": "2026-11-22"
+  },
+  "tagGroups": {
+    "Graph class / setting": [
+      "Directed graphs",
+      "Undirected graphs",
+      "Mixed graphs",
+      "Planar graphs",
+      "Metric spaces"
+    ],
+    "Problem family": [
+      "Steiner problems",
+      "Network design",
+      "Cuts and separators",
+      "Deletion problems",
+      "Clustering",
+      "Orientation problems",
+      "Width parameters"
+    ],
+    "Hardness assumption": [
+      "Gap-ETH",
+      "ETH",
+      "PIH",
+      "W[1] ≠ FPT",
+      "P ≠ NP",
+      "UGC"
+    ]
+  },
+  "problems": [
+    {
+      "id": "scss",
+      "name": "Strongly Connected Steiner Subgraph",
+      "short": "SCSS",
+      "definition": "Given a digraph \\(G=(V,E)\\) and a set of terminals \\(T=\\{t_1, t_2, \\ldots, t_k\\}\\), is there a set \\(H\\subseteq V\\) of size \\(\\leq p\\) such that \\(G[H]\\) has a \\(t_i \\leadsto t_j\\) path for each \\(1\\leq i\\neq j\\leq k\\)?",
+      "parameter": "number of terminals \\(k\\)",
+      "tags": [
+        "Directed graphs",
+        "Steiner problems",
+        "Network design",
+        "Gap-ETH"
+      ],
+      "tight": true,
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "2-approximation in \\(2^{k}\\cdot n^{O(1)}\\) time",
+          "refs": [
+            "N13"
+          ]
+        },
+        {
+          "type": "lower-bound",
+          "statement": "No \\((2-\\epsilon)\\)-approximation in \\(f(k)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under Gap-ETH",
+          "refs": [
+            "CFM18"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "doct",
+      "name": "Directed Odd Cycle Transversal",
+      "short": "DOCT",
+      "definition": "Given a digraph \\(G=(V,E)\\), is there a set \\(H\\subseteq V\\) of size \\(\\leq k\\) such that \\(G[V\\setminus H]\\) has no (directed) odd cycles?",
+      "parameter": "solution size \\(k\\)",
+      "tags": [
+        "Directed graphs",
+        "Deletion problems",
+        "PIH",
+        "W[1] ≠ FPT"
+      ],
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "2-approximation in \\(2^{O(k^2)}\\cdot n^{O(1)}\\) time",
+          "refs": [
+            "LRSZ17"
+          ]
+        },
+        {
+          "type": "lower-bound",
+          "statement": "There is a constant \\(\\epsilon>0\\) such that there is no \\((1+\\epsilon)\\)-approximation in \\(f(k)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under the Parameterized Inapproximability Hypothesis (PIH) and FPT \\(\\neq\\) W[1]",
+          "refs": [
+            "LRSZ17"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dsn",
+      "name": "Directed Steiner Network",
+      "short": "DSN",
+      "definition": "Given a digraph \\(G=(V,E)\\) and a set of terminal pairs \\(T=\\{(s_i, t_i)\\ :\\ i\\in [k]\\}\\), is there a set \\(H\\subseteq V\\) of size \\(\\leq p\\) such that \\(G[H]\\) has an \\(s_i \\leadsto t_i\\) path for each \\(i\\in [k]\\)?",
+      "parameter": "number of terminal pairs \\(k\\)",
+      "tags": [
+        "Directed graphs",
+        "Steiner problems",
+        "Network design",
+        "Planar graphs",
+        "Gap-ETH",
+        "ETH"
+      ],
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "\\(k^{1/2+\\epsilon}\\)-approximation in polynomial time, for every \\(\\epsilon>0\\)",
+          "refs": [
+            "CEGS11",
+            "FKN12"
+          ]
+        },
+        {
+          "type": "lower-bound",
+          "statement": "No \\(k^{1/4-o(1)}\\)-approximation in \\(f(k)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under Gap-ETH",
+          "refs": [
+            "DM18"
+          ]
+        },
+        {
+          "type": "special-case",
+          "title": "Bidirected graphs (Bi-DSN)",
+          "statement": "When the input graph is bidirected, i.e., for every edge \\(u\\rightarrow v\\) the reverse edge \\(v\\rightarrow u\\) is also present and has the same weight, the problem is called Bi-DSN. There is a \\(2\\)-approximation in \\(2^{k\\log k}\\cdot n^{O(1)}\\) time. On the lower bound side, there is a constant \\(\\epsilon>0\\) such that there is no \\((1+\\epsilon)\\)-approximation in \\(f(k)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under Gap-ETH.",
+          "refs": [
+            "CFM18"
+          ]
+        },
+        {
+          "type": "special-case",
+          "title": "Bidirected graphs, planar solutions (\\(\\text{Bi-DSN}_{\\text{Planar}}\\))",
+          "statement": "In bidirected graphs, the problem of finding an optimal <i>planar</i> solution is called \\(\\text{Bi-DSN}_{\\text{Planar}}\\). There is a \\((1+\\epsilon)\\)-approximation in \\(\\max\\{ 2^{k^{2^{O(1/\\epsilon)}}}, n^{2^{O(1/\\epsilon)}} \\}\\) time. On the lower bound side, a \\((1+\\epsilon)\\)-approximation is not possible in \\(f(\\epsilon,k)\\cdot n^{o(\\sqrt{k})}\\) time (for any function \\(f\\)) under ETH.",
+          "refs": [
+            "CFM18"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tree-cut-width",
+      "name": "Tree-cut width",
+      "definition": "Is the tree-cut width of a given undirected graph \\(\\leq w\\)? See [W15] for a definition of tree-cut width.",
+      "definitionRefs": [
+        "W15"
+      ],
+      "parameter": "tree-cut width \\(w\\)",
+      "tags": [
+        "Width parameters",
+        "Undirected graphs"
+      ],
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "\\(2\\)-approximation in \\(2^{O(w^{2}\\cdot \\log w)}\\cdot n^{2}\\) time",
+          "refs": [
+            "KOPST18"
+          ]
+        },
+        {
+          "type": "note",
+          "statement": "No lower bound is known. There is a (non-constructive) FPT algorithm for tree-cut width parameterized by \\(w\\).",
+          "refs": []
+        }
+      ]
+    },
+    {
+      "id": "steiner-orientation",
+      "name": "Steiner Orientation",
+      "definition": "Given a mixed graph \\(G=(V,E)\\) and a set of terminal pairs \\(T=\\{(s_i, t_i)\\ :\\ i\\in [k]\\}\\), is there an orientation of the undirected edges of \\(G\\) such that the resulting graph has an \\(s_i \\leadsto t_i\\) path for each \\(i\\in [k]\\)?",
+      "parameter": "number of terminal pairs \\(k\\)",
+      "tags": [
+        "Mixed graphs",
+        "Orientation problems",
+        "Planar graphs",
+        "Gap-ETH"
+      ],
+      "results": [
+        {
+          "type": "lower-bound",
+          "statement": "No \\((19/20+\\epsilon)\\)-approximation (for any \\(\\epsilon>0\\)) in \\(f(k)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under Gap-ETH, even if the input graph is <i>planar</i>",
+          "refs": [
+            "CFS19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-cut",
+      "name": "\\(k\\)-Cut",
+      "short": "k-Cut",
+      "definition": "Given an edge-weighted undirected graph \\(G\\) and an integer \\(k\\), can we remove a set of edges of weight \\(\\leq p\\) so that \\(G\\) has at least \\(k\\) connected components?",
+      "parameter": "number of components \\(k\\)",
+      "tags": [
+        "Cuts and separators",
+        "Undirected graphs"
+      ],
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "1.81-approximation in \\(2^{O(k^2)}\\cdot n^{O(1)}\\) time, and \\((1+\\epsilon)\\)-approximation in \\((k/\\epsilon)^{O(k)}\\cdot n^{k+O(1)}\\) time for every \\(\\epsilon>0\\)",
+          "refs": [
+            "GLL18"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-median",
+      "name": "\\(k\\)-Median",
+      "short": "k-Median",
+      "definition": "Given a metric space \\((V,d)\\) with \\(n\\) points and clients at some of the points, open \\(k\\) facilities such that the sum of distances from the clients to their closest facilities is minimized.",
+      "parameter": "number of facilities \\(k\\)",
+      "tags": [
+        "Clustering",
+        "Metric spaces",
+        "Gap-ETH"
+      ],
+      "tight": true,
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "For every \\(\\epsilon>0\\), a \\((1+\\frac{2}{e}+\\epsilon)\\)-approximation in \\(f(k,\\epsilon)\\cdot n^{O(1)}\\) time",
+          "refs": [
+            "CGKLL19"
+          ]
+        },
+        {
+          "type": "lower-bound",
+          "statement": "No \\((1+\\frac{2}{e}-\\epsilon)\\)-approximation (for any \\(\\epsilon>0\\)) in \\(f(k)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under Gap-ETH",
+          "refs": [
+            "CGKLL19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-means",
+      "name": "\\(k\\)-Means",
+      "short": "k-Means",
+      "definition": "Given a metric space \\((V,d)\\) with \\(n\\) points and clients at some of the points, open \\(k\\) facilities such that the sum of squared distances from the clients to their closest facilities is minimized.",
+      "parameter": "number of facilities \\(k\\)",
+      "tags": [
+        "Clustering",
+        "Metric spaces",
+        "Gap-ETH"
+      ],
+      "tight": true,
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "For every \\(\\epsilon>0\\), a \\((1+\\frac{8}{e}+\\epsilon)\\)-approximation in \\(f(k,\\epsilon)\\cdot n^{O(1)}\\) time",
+          "refs": [
+            "CGKLL19"
+          ]
+        },
+        {
+          "type": "lower-bound",
+          "statement": "No \\((1+\\frac{8}{e}-\\epsilon)\\)-approximation (for any \\(\\epsilon>0\\)) in \\(f(k)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under Gap-ETH",
+          "refs": [
+            "CGKLL19"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "directed-multicut-4",
+      "name": "Directed Multicut with 4 pairs",
+      "definition": "Given a digraph \\(G=(V,E)\\) and a set of terminal pairs \\(T=\\{(s_i, t_i)\\ :\\ 1\\leq i\\leq 4\\}\\), is there a set \\(H\\subseteq V\\) of size \\(\\leq p\\) such that \\(G[V\\setminus H]\\) has no \\(s_i \\leadsto t_i\\) path for each \\(1\\leq i\\leq 4\\)?",
+      "parameter": "solution size \\(p\\)",
+      "tags": [
+        "Directed graphs",
+        "Cuts and separators",
+        "Gap-ETH"
+      ],
+      "results": [
+        {
+          "type": "algorithm",
+          "statement": "\\(2\\)-approximation in \\(2^{O(p^2)}\\cdot n^{O(1)}\\) time",
+          "refs": [
+            "CF19"
+          ],
+          "added": "2026-11-22"
+        },
+        {
+          "type": "lower-bound",
+          "statement": "No \\((59/58-\\epsilon)\\)-approximation (for any \\(\\epsilon>0\\)) in \\(f(p)\\cdot n^{O(1)}\\) time (for any function \\(f\\)) under Gap-ETH",
+          "refs": [
+            "CF19"
+          ],
+          "added": "2026-11-22"
+        }
+      ]
+    }
+  ],
+  "references": {
+    "CEGS11": {
+      "authors": [
+        "Chandra Chekuri",
+        "Guy Even",
+        "Anupam Gupta",
+        "Danny Segev"
+      ],
+      "title": "Set connectivity problems in undirected graphs and the directed Steiner network problem",
+      "venue": "ACM Trans. Algorithms 7(2): 18:1-18:17",
+      "year": 2011
+    },
+    "CF19": {
+      "authors": [
+        "Rajesh Chitnis",
+        "Andreas Emil Feldmann"
+      ],
+      "title": "FPT Inapproximability of Directed Cut and Connectivity Problems",
+      "venue": "IPEC 2019, LIPIcs 148: 8:1-8:20",
+      "year": 2019,
+      "url": "https://doi.org/10.4230/LIPIcs.IPEC.2019.8",
+      "arxiv": "1910.01934"
+    },
+    "CFM18": {
+      "authors": [
+        "Rajesh Chitnis",
+        "Andreas Emil Feldmann",
+        "Pasin Manurangsi"
+      ],
+      "title": "Parameterized Approximation Algorithms for Bidirected Steiner Network Problems",
+      "venue": "ESA 2018: 20:1-20:16",
+      "year": 2018,
+      "url": "https://doi.org/10.4230/LIPIcs.ESA.2018.20",
+      "arxiv": "1707.06499"
+    },
+    "CFS19": {
+      "authors": [
+        "Rajesh Chitnis",
+        "Andreas Emil Feldmann",
+        "Ondřej Suchý"
+      ],
+      "title": "A Tight Lower Bound for Planar Steiner Orientation",
+      "venue": "Algorithmica",
+      "year": 2019
+    },
+    "CGKLL19": {
+      "authors": [
+        "Vincent Cohen-Addad",
+        "Anupam Gupta",
+        "Amit Kumar",
+        "Euiwoong Lee",
+        "Jason Li"
+      ],
+      "title": "Tight FPT Approximations for \\(k\\)-Median and \\(k\\)-Means",
+      "venue": "ICALP 2019",
+      "year": 2019
+    },
+    "DM18": {
+      "authors": [
+        "Irit Dinur",
+        "Pasin Manurangsi"
+      ],
+      "title": "ETH-Hardness of Approximating 2-CSPs and Directed Steiner Network",
+      "venue": "ITCS 2018: 36:1-36:20",
+      "year": 2018
+    },
+    "FKN12": {
+      "authors": [
+        "Moran Feldman",
+        "Guy Kortsarz",
+        "Zeev Nutov"
+      ],
+      "title": "Improved approximation algorithms for Directed Steiner Forest",
+      "venue": "J. Comput. Syst. Sci. 78(1): 279-292",
+      "year": 2012
+    },
+    "GLL18": {
+      "authors": [
+        "Anupam Gupta",
+        "Euiwoong Lee",
+        "Jason Li"
+      ],
+      "title": "Faster Exact and Approximate Algorithms for \\(k\\)-Cut",
+      "venue": "FOCS 2018: 113-123",
+      "year": 2018
+    },
+    "KOPST18": {
+      "authors": [
+        "Eun Jung Kim",
+        "Sang-il Oum",
+        "Christophe Paul",
+        "Ignasi Sau",
+        "Dimitrios M. Thilikos"
+      ],
+      "title": "An FPT 2-Approximation for Tree-Cut Decomposition",
+      "venue": "Algorithmica 80(1): 116-135",
+      "year": 2018
+    },
+    "LRSZ17": {
+      "authors": [
+        "Daniel Lokshtanov",
+        "M. S. Ramanujan",
+        "Saket Saurabh",
+        "Meirav Zehavi"
+      ],
+      "title": "Parameterized Complexity and Approximability of Directed Odd Cycle Transversal",
+      "venue": "CoRR abs/1704.04249",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1704.04249",
+      "arxiv": "1704.04249"
+    },
+    "N13": {
+      "authors": [
+        "Jesper Nederlof"
+      ],
+      "title": "Fast Polynomial-Space Algorithms Using Inclusion-Exclusion",
+      "venue": "Algorithmica 65(4): 868-884",
+      "year": 2013
+    },
+    "W15": {
+      "authors": [
+        "Paul Wollan"
+      ],
+      "title": "The structure of graphs not admitting a fixed immersion",
+      "venue": "J. Comb. Theory, Ser. B 110: 47-66",
+      "year": 2015
+    }
+  }
+}

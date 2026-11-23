@@ -1,0 +1,21 @@
+<li>
+<b>Directed Multitcut with 4 pairs:</b> Given a digraph \(G=(V,E)\) and a set of terminal pairs \(T=\{(s_i, t_i)\ :\ 1\leq i\leq 4\}\) is there a set \(H\subseteq V\) of size \(\leq p\) such that \(G[V\setminus H]\) has no \(s_i \leadsto t_i\) path for each \(1\leq i\leq 4\) <br>
+<b>Algorithm:</b> \(2\)-approximation in \(2^{O(p^2)}\cdot n^{O(1)}\) time  <a href="#CF19" style="color: #0000ff">  [CF19]</a> <br>
+<b>Lower Bound:</b> No \((59/58-\epsilon)\)-approximation (for any \(\epsilon>0\)) in \(f(p)\cdot n^{O(1)}\) time (for any function \(f\)) under Gap-ETH <a href="#CF19" style="color: #0000ff">  [CF19]</a> <br>
+</li>
+
+<br>
+
+
+<a name="CF19", href="" style="color: #0000ff"> [CF19] </a> Rajesh Chitnis, Andreas Emil Feldmann: <b>FPT Inapproximability of Directed Cut and Connectivity Problems.</b> 2019<br>
+
+
+
+- Capacitated k-means and clustering (Cohen-Addad and Li)
+- Mulitcut with unbounded number of terminal pairs
+- Pasin SOSA paper
+- FOCS paper about Clique et al.
+- Pasin, karthik, Bundit for Set Cover, and results of Lin
+- ESA submission on some contraction problems
+- My bi-DSN and other results from ESA paper and new IPEC submission
+- fedor's ICML paper on PCA

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About | FPT Approximation Compendium</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><span class="cap">FPT</span> Approximation Compendium</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Browse</a>
+      <a href="index.html#references">References</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="submit.html" class="nav-cta">Submit a result</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page page-narrow prose">
+  <h1>About the compendium</h1>
+  <p class="lede">A single place to check what is known about approximating NP-hard problems in FPT time: the best algorithms, the strongest lower bounds, and where the gaps are.</p>
+
+  <h2>What belongs here</h2>
+  <p>Results on <b>parameterized approximation</b>: algorithms that achieve an approximation ratio in time \(f(k)\cdot n^{O(1)}\) for some parameter \(k\), and lower bounds ruling such algorithms out under assumptions such as Gap-ETH, ETH, PIH or W[1] \(\neq\) FPT. Polynomial-time approximations and exact FPT results are welcome as context when they help place a problem.</p>
+  <p>Each problem shows its best known <b>algorithm</b> and <b>lower bound</b> side by side, with a status:</p>
+  <ul>
+    <li><b>Tight:</b> the algorithm matches the lower bound.</li>
+    <li><b>Gap remains:</b> both are known, but they don't match.</li>
+    <li><b>No lower bound known</b> or <b>No algorithm known:</b> only one side has been studied.</li>
+  </ul>
+
+  <h2 id="how-it-works">How submissions work</h2>
+  <ol>
+    <li>Anyone can <a href="submit.html">submit a result</a>: a link to the paper, the problem, the result statements (with LaTeX) and a few tags. The form shows a live preview.</li>
+    <li>The submission is recorded as a public GitHub issue, or sent by email if you don't have a GitHub account.</li>
+    <li>An editor checks it against the paper. If something is unclear, the editor asks on the issue, and you're notified.</li>
+    <li>Once approved, it is added to the compendium automatically and you're credited on the entry.</li>
+  </ol>
+  <p>Spotted a mistake in an existing entry? Use <b>Add a result</b> on that problem and explain the correction in the note to the editors, or email <a href="mailto:fptapprox@gmail.com">fptapprox@gmail.com</a>.</p>
+
+  <h2>Using the data</h2>
+  <p>Everything on the site comes from one file, <a href="data/compendium.json">data/compendium.json</a>, which you are free to download and reuse. The references are also available <a href="index.html#references">as BibTeX</a>. Every problem has its own link (use <b>Copy link</b>) for citing in talks and papers.</p>
+
+  <h2>History</h2>
+  <p>The compendium grew out of the <i>List of FPT+Approximation results</i> started in 2019. The <a href="legacy/index.html">original list</a> is kept unchanged as an archive.</p>
+
+  <h2 id="editors">For editors</h2>
+  <p>Open the <a href="admin.html">editors' page</a>. The first time, it walks you through creating a GitHub access token. After that:</p>
+  <ul>
+    <li><b>Approve and publish</b> adds the submission to the site within a couple of minutes and notifies the submitter.</li>
+    <li><b>Ask the submitter</b> posts a question on the submission and keeps it pending.</li>
+    <li><b>Reject</b> closes it with your explanation.</li>
+    <li>To fix a typo in a submission before approving, open it on GitHub, edit the JSON block, and then approve.</li>
+    <li>Emailed submissions: paste the email into the <b>Add an emailed submission</b> tab.</li>
+    <li>To correct or reorganise existing entries (for example, to mark a problem as tight), use the <b>Edit existing entries</b> tab.</li>
+  </ul>
+  <p>To add another editor, add their GitHub account as a collaborator on the repository (<b>Settings → Collaborators</b>).</p>
+
+  <h2>Contact</h2>
+  <p><a href="mailto:fptapprox@gmail.com">fptapprox@gmail.com</a></p>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="legacy/index.html">Original list (2019 archive)</a>
+    <a href="data/compendium.json" download>Download all data (JSON)</a>
+    <span class="spacer"></span>
+    <a href="admin.html">Editors</a>
+  </div>
+</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false}]})"></script>
+</body>
+</html>

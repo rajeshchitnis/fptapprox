@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FPT Approximation Compendium: parameterized approximation algorithms and lower bounds</title>
+  <meta name="description" content="A community-maintained list of the best known parameterized (FPT) approximation algorithms and matching lower bounds, with references.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script defer src="assets/apply.js"></script>
+  <script defer src="assets/site.js"></script>
+  <script defer src="assets/browse.js"></script>
+</head>
+<body>
+<a class="skip" href="#results">Skip to results</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><span class="cap">FPT</span> Approximation Compendium</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Browse</a>
+      <a href="index.html#references">References</a>
+      <a href="about.html">About</a>
+      <a href="submit.html" class="nav-cta">Submit a result</a>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead">
+  <h1>Parameterized approximation: what is known</h1>
+  <p class="lede">The best known FPT approximation algorithms and lower bounds, problem by problem, with references. Maintained by the community and checked by editors.</p>
+  <div class="search-row">
+    <label class="search" for="q">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="visually-hidden">Search</span>
+      <input id="q" type="search" placeholder="Search problems, results, authors, assumptions…" autocomplete="off">
+      <kbd aria-hidden="true">/</kbd>
+    </label>
+  </div>
+  <p class="stats" id="stats" aria-live="polite">&nbsp;</p>
+</section>
+
+<div class="layout">
+  <aside class="filters" id="filters" data-collapsed="true" aria-label="Filters">
+    <button type="button" class="btn filters-toggle" id="filters-toggle" aria-expanded="false" aria-controls="filters-body">Show filters</button>
+    <div class="filters-body" id="filters-body"></div>
+  </aside>
+
+  <main id="results" tabindex="-1">
+    <div id="recent"></div>
+    <div class="toolbar">
+      <span id="count" aria-live="polite"></span>
+      <div class="active-filters" id="active"></div>
+      <span class="spacer"></span>
+      <label>Sort
+        <select id="sort">
+          <option value="name">A to Z</option>
+          <option value="updated">Recently updated</option>
+          <option value="status">By status</option>
+        </select>
+      </label>
+    </div>
+    <div class="problems" id="list"><p class="loading">Loading the compendium…</p></div>
+
+    <h2 class="section-title" id="references">References</h2>
+    <p class="section-sub">Every paper cited above. <button type="button" class="btn-link" id="dl-bib">Download as BibTeX</button></p>
+    <ol class="refs" id="refs"></ol>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>Corrections and comments: <a href="mailto:fptapprox@gmail.com">fptapprox@gmail.com</a></span>
+    <a href="legacy/index.html">Original list (2019 archive)</a>
+    <a href="data/compendium.json" download>Download all data (JSON)</a>
+    <span class="spacer"></span>
+    <a href="admin.html">Editors</a>
+  </div>
+</footer>
+<noscript><div class="notice warn">This site needs JavaScript to show the results. The <a href="legacy/index.html">original static list</a> works without it, and the raw data is in <a href="data/compendium.json">data/compendium.json</a>.</div></noscript>
+</body>
+</html>
